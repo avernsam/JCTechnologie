@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 700" role="img" aria-labelledby="title desc">
+  <title id="title">Installation de climatisation</title>
+  <desc id="desc">Climatiseur mural dans une pièce lumineuse, avec un flux d’air frais.</desc>
+  <defs>
+    <linearGradient id="room" x2="0" y2="1">
+      <stop stop-color="#e5f5fb"/>
+      <stop offset="1" stop-color="#f7fbfc"/>
+    </linearGradient>
+    <linearGradient id="wall" x2="1" y2="1">
+      <stop stop-color="#f8fcfc"/>
+      <stop offset="1" stop-color="#dcecf0"/>
+    </linearGradient>
+    <linearGradient id="unit" x2="0" y2="1">
+      <stop stop-color="#fff"/>
+      <stop offset="1" stop-color="#d8e5ea"/>
+    </linearGradient>
+    <linearGradient id="cold" x2="0" y2="1">
+      <stop stop-color="#41bce5" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#2099d1" stop-opacity=".45"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#room)" d="M0 0h480v700H0z"/>
+  <path fill="#d0e9f0" opacity=".56" d="M0 0h480v102H0z"/>
+  <path fill="url(#wall)" d="M0 88h480v459H0z"/>
+  <path fill="#e7f0ee" d="M0 547h480v153H0z"/>
+  <path fill="#c7dce1" d="M42 119h169v239H42z"/>
+  <path fill="#f7fcff" d="M53 130h147v215H53z"/>
+  <path fill="#a8d9ed" d="M63 140h127v195H63z"/>
+  <path fill="#f8fcfc" opacity=".5" d="m63 285 52-61 75 78v33H63z"/>
+  <path fill="#fff" opacity=".64" d="M63 140h127v195H63z"/>
+  <path fill="#dce8e9" d="M0 516h480v19H0z"/>
+  <path fill="#173c65" d="M0 535h480v165H0z"/>
+  <path fill="#27557a" d="M0 549h480v12H0z"/>
+  <ellipse cx="263" cy="259" rx="127" ry="43" fill="#bfdce6" opacity=".4"/>
+  <path fill="url(#unit)" stroke="#bfd0d8" stroke-width="3" d="M137 174h238c17 0 30 12 30 28v83c0 11-9 20-20 20H127c-11 0-20-9-20-20v-81c0-17 13-30 30-30Z"/>
+  <path fill="#fdfefe" d="M140 187h225c13 0 23 8 23 19v49H117v-45c0-13 10-23 23-23Z"/>
+  <path fill="#aabcc4" d="M119 258h279v22c0 8-6 14-14 14H133c-8 0-14-6-14-14z"/>
+  <path fill="#607f8e" d="M157 270h208v5H157z"/>
+  <circle cx="371" cy="208" r="5" fill="#49b879"/>
+  <path fill="url(#cold)" d="M149 294h216l46 174H102z"/>
+  <path fill="none" stroke="#52bde3" stroke-width="5" stroke-linecap="round" d="M173 319c-19 39 17 46 0 83m53-79c-19 39 17 46 0 83m56-79c-19 39 17 46 0 83m54-79c-19 39 17 46 0 83" opacity=".8"/>
+  <path fill="#d7e4d9" d="M68 476h153v75H68z"/>
+  <path fill="#f4f7f2" d="M79 486h132v61H79z"/>
+  <path fill="#42775f" d="M43 545c7-62 21-75 34-10 5-51 23-72 31-4 10-49 25-64 32 14H43Z"/>
+  <path fill="#67a57b" d="M37 551c-4-48-19-67-24-10-9-39-17-48-13 10zm129 0c7-45 20-61 27-9 7-34 21-51 23 9z"/>
+  <path fill="#d5e9e5" d="M314 487h114v63H314z"/>
+  <path fill="#eef5f2" d="M325 497h92v53h-92z"/>
+  <path fill="#9ab8b4" d="M325 540h92v10h-92z"/>
+  <path fill="#6fa2aa" d="M349 509h43v7h-43zm0 15h34v5h-34z"/>
+  <path fill="#f8fcfd" d="M0 561h480v139H0z" opacity=".14"/>
+</svg>
