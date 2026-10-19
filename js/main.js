@@ -91,6 +91,8 @@ const galleryImage = document.querySelector("#service-gallery-image");
 const galleryTitle = document.querySelector("#service-gallery-title");
 const galleryCount = document.querySelector("#service-gallery-count");
 const galleryCaption = document.querySelector("#service-gallery-caption");
+const galleryViewer = serviceGallery?.querySelector(".service-gallery-viewer");
+const galleryFeed = document.querySelector("#service-gallery-feed");
 const galleryClose = serviceGallery?.querySelector(".service-gallery-close");
 const galleryPrevious = serviceGallery?.querySelector(".service-gallery-prev");
 const galleryNext = serviceGallery?.querySelector(".service-gallery-next");
@@ -144,12 +146,21 @@ let galleryOpener = null;
 function showGalleryImage(index) {
   if (!activeGallery) return;
   const images = activeGallery.images;
+  const scrollingDown = index > activeGalleryIndex;
   activeGalleryIndex = (index + images.length) % images.length;
   const photo = images[activeGalleryIndex];
+  const wasOpen = serviceGallery?.open;
   galleryImage.src = photo.src;
   galleryImage.alt = photo.alt;
+  galleryImage.classList.remove("service-gallery-image-scroll-down", "service-gallery-image-scroll-up");
+  if (wasOpen) {
+    void galleryImage.offsetWidth;
+    galleryImage.classList.add(scrollingDown ? "service-gallery-image-scroll-down" : "service-gallery-image-scroll-up");
+  }
   galleryTitle.textContent = activeGallery.title;
-  galleryCount.textContent = `Photo ${activeGalleryIndex + 1} sur ${images.length}`;
+  galleryCount.textContent = window.matchMedia("(max-width: 768px)").matches
+    ? `${images.length} photos · faites défiler`
+    : `Photo ${activeGalleryIndex + 1} sur ${images.length}`;
   galleryCaption.textContent = photo.caption;
 }
 
@@ -158,6 +169,21 @@ function openServiceGallery(trigger) {
   activeGallery = serviceGalleryContent[trigger.dataset.serviceGallery];
   if (!activeGallery) return;
   galleryOpener = trigger;
+  if (galleryFeed) {
+    galleryFeed.replaceChildren();
+    activeGallery.images.forEach((photo) => {
+      const card = document.createElement("figure");
+      const image = document.createElement("img");
+      const caption = document.createElement("figcaption");
+      image.src = photo.src;
+      image.alt = photo.alt;
+      image.loading = "lazy";
+      image.decoding = "async";
+      caption.textContent = photo.caption;
+      card.append(image, caption);
+      galleryFeed.append(card);
+    });
+  }
   showGalleryImage(0);
   serviceGallery.showModal();
 }
@@ -180,9 +206,30 @@ serviceGallery?.addEventListener("click", (event) => {
 });
 serviceGallery?.addEventListener("close", () => galleryOpener?.focus());
 serviceGallery?.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft") showGalleryImage(activeGalleryIndex - 1);
-  if (event.key === "ArrowRight") showGalleryImage(activeGalleryIndex + 1);
+  if (window.matchMedia("(max-width: 768px)").matches) return;
+  if (event.key === "ArrowUp") showGalleryImage(activeGalleryIndex - 1);
+  if (event.key === "ArrowDown") showGalleryImage(activeGalleryIndex + 1);
 });
+
+let galleryTouchStartY = null;
+galleryViewer?.addEventListener("wheel", (event) => {
+  if (window.matchMedia("(max-width: 768px)").matches) return;
+  if (Math.abs(event.deltaY) < 25) return;
+  event.preventDefault();
+  showGalleryImage(activeGalleryIndex + (event.deltaY > 0 ? 1 : -1));
+}, { passive: false });
+galleryViewer?.addEventListener("touchstart", (event) => {
+  if (window.matchMedia("(max-width: 768px)").matches) return;
+  galleryTouchStartY = event.changedTouches[0].clientY;
+}, { passive: true });
+galleryViewer?.addEventListener("touchend", (event) => {
+  if (window.matchMedia("(max-width: 768px)").matches) return;
+  if (galleryTouchStartY === null) return;
+  const swipeDistance = galleryTouchStartY - event.changedTouches[0].clientY;
+  galleryTouchStartY = null;
+  if (Math.abs(swipeDistance) < 45) return;
+  showGalleryImage(activeGalleryIndex + (swipeDistance > 0 ? 1 : -1));
+}, { passive: true });
 
 if (menuToggle && mainNav) {
   const closeMenu = () => {
