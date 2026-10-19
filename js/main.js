@@ -1,5 +1,4 @@
-// Numéro WhatsApp principal, au format international sans le signe +.
-const WHATSAPP_NUMBER = "243991085865";
+const WHATSAPP_NUMBERS = ["243803548088", "243991085865"];
 
 const menuToggle = document.querySelector(".menu-toggle");
 const mainNav = document.querySelector("#main-nav");
@@ -34,8 +33,9 @@ if (themeToggle) {
   });
 }
 
-function whatsappUrl(message) {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+function whatsappUrl(message, number = WHATSAPP_NUMBERS[0]) {
+  const text = message ? `?text=${encodeURIComponent(message)}` : "";
+  return `https://wa.me/${number}${text}`;
 }
 
 function serviceMessage(service) {
@@ -46,6 +46,45 @@ document.querySelectorAll(".service-quote").forEach((link) => {
   const service = link.dataset.service;
   link.href = whatsappUrl(serviceMessage(service));
 });
+
+document.addEventListener("pointerdown", (event) => {
+  document.querySelectorAll(".contact-menu[open]").forEach((menu) => {
+    if (!menu.contains(event.target)) menu.open = false;
+  });
+});
+
+const whatsappChooser = document.querySelector("#whatsapp-chooser");
+const whatsappOptions = whatsappChooser?.querySelectorAll("[data-whatsapp-option]");
+const whatsappClose = whatsappChooser?.querySelector(".whatsapp-chooser-close");
+
+function openWhatsAppChooser(message) {
+  if (!whatsappChooser || typeof whatsappChooser.showModal !== "function" || !whatsappOptions) {
+    const whatsappWindow = window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
+    return Boolean(whatsappWindow);
+  }
+
+  whatsappOptions.forEach((option, index) => {
+    option.href = whatsappUrl(message, WHATSAPP_NUMBERS[index]);
+  });
+  whatsappChooser.showModal();
+  return true;
+}
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest('a[href*="wa.me/"]');
+  if (!link || link.matches("[data-whatsapp-option]")) return;
+
+  event.preventDefault();
+  const message = new URL(link.href, window.location.href).searchParams.get("text") || "";
+  openWhatsAppChooser(message);
+});
+
+if (whatsappClose && whatsappChooser) {
+  whatsappClose.addEventListener("click", () => whatsappChooser.close());
+  whatsappChooser.addEventListener("click", (event) => {
+    if (event.target === whatsappChooser) whatsappChooser.close();
+  });
+}
 
 if (menuToggle && mainNav) {
   const closeMenu = () => {
@@ -151,14 +190,11 @@ if (form) {
 
     const data = new FormData(form);
     const message = `Bonjour JC Technology, je suis ${data.get("name").trim()} de ${data.get("city").trim()}. Service : ${data.get("service")}. Mon numéro : ${data.get("phone").trim()}. Message : ${data.get("message").trim()}`;
-    const whatsappWindow = window.open(whatsappUrl(message), "_blank");
-
-    if (!whatsappWindow) {
+    if (!openWhatsAppChooser(message)) {
       formStatus.textContent = "WhatsApp n’a pas pu s’ouvrir. Vérifiez le blocage des fenêtres ou contactez-nous directement.";
       return;
     }
-    whatsappWindow.opener = null;
-    formStatus.textContent = "Votre demande est prête dans WhatsApp. Envoyez le message pour nous la transmettre.";
+    formStatus.textContent = "Choisissez le numéro WhatsApp auquel envoyer votre demande.";
   });
 }
 
