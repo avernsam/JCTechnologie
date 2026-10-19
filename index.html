@@ -122,7 +122,7 @@
         </div>
         <div class="service-grid">
           <article class="service-card service-card-featured reveal">
-            <figure class="service-photo service-photo-gps">
+            <figure class="service-photo service-photo-gps" role="button" tabindex="0" data-service-gallery="gps" aria-label="Voir les photos du service Suivi GPS">
               <img src="assets/gps-alert-demo.jpeg" alt="Exemple d’alerte GPS sur smartphone après un mouvement suspect ou un choc détecté sur un véhicule" width="1198" height="898" loading="lazy" decoding="async">
               <figcaption><span>01 / SUIVI</span><strong>Suivi GPS</strong></figcaption>
             </figure>
@@ -143,7 +143,7 @@
             </div>
           </article>
           <article class="service-card service-card-featured reveal">
-            <figure class="service-photo service-photo-camera">
+            <figure class="service-photo service-photo-camera" role="button" tabindex="0" data-service-gallery="camera" aria-label="Voir les photos du service Caméras de surveillance">
               <img src="Camera%20de%20surveillance.png" alt="Installation de caméras de surveillance sur un poteau en extérieur" width="960" height="720" loading="lazy" decoding="async">
               <figcaption><span>02 / PROTECTION</span><strong>Caméras de surveillance</strong></figcaption>
             </figure>
@@ -163,7 +163,7 @@
             </div>
           </article>
           <article class="service-card service-card-featured reveal">
-            <figure class="service-photo service-photo-solar">
+            <figure class="service-photo service-photo-solar" role="button" tabindex="0" data-service-gallery="solar" aria-label="Voir les photos du service Énergie solaire">
               <img src="assets/solaire-toiture-istock.jpg" alt="Maison avec des panneaux solaires installés sur le toit" width="612" height="408" loading="lazy" decoding="async">
               <figcaption><span>03 / AUTONOMIE</span><strong>Énergie solaire</strong></figcaption>
             </figure>
@@ -183,7 +183,7 @@
             </div>
           </article>
           <article class="service-card service-card-featured reveal">
-            <figure class="service-photo service-photo-air">
+            <figure class="service-photo service-photo-air" role="button" tabindex="0" data-service-gallery="air" aria-label="Voir les photos du service Climatisation">
               <img src="assets/climatisation-photo.jpg" alt="Climatiseur mural installé au-dessus d’un rideau dans une pièce" width="960" height="1707" loading="lazy" decoding="async">
               <figcaption><span>04 / CONFORT</span><strong>Climatisation</strong></figcaption>
             </figure>
@@ -353,6 +353,8 @@
             </div>
             <div class="form-field"><label for="message">Votre message <span>*</span></label><textarea id="message" name="message" rows="4" placeholder="Parlez-nous de votre besoin..." required minlength="10" aria-describedby="message-error"></textarea><small class="field-error" id="message-error"></small></div>
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            <p class="form-privacy">Vos informations seront mémorisées sur cet appareil pour vos prochaines visites.</p>
+            <button class="clear-contact-memory" id="clear-contact-memory" type="button">Effacer mes informations mémorisées</button>
             <button class="button button-green submit-button" type="submit">Envoyer ma demande sur WhatsApp <span aria-hidden="true">→</span></button>
             <p class="form-privacy">Votre demande sera préparée dans WhatsApp. Aucune donnée n’est envoyée à un serveur depuis ce site.</p>
           </form>
@@ -370,6 +372,19 @@
       <a class="whatsapp-option" data-whatsapp-option href="https://wa.me/243803548088" target="_blank" rel="noopener noreferrer">Numéro 1 <strong>+243 803 548 088</strong></a>
       <a class="whatsapp-option" data-whatsapp-option href="https://wa.me/243991085865" target="_blank" rel="noopener noreferrer">Numéro 2 <strong>+243 991 085 865</strong></a>
     </div>
+  </dialog>
+
+  <dialog class="service-gallery" id="service-gallery" aria-labelledby="service-gallery-title">
+    <div class="service-gallery-header">
+      <div><h2 id="service-gallery-title">Photos du service</h2><p id="service-gallery-count" aria-live="polite"></p></div>
+      <button class="whatsapp-chooser-close service-gallery-close" type="button" aria-label="Fermer la galerie">×</button>
+    </div>
+    <div class="service-gallery-viewer">
+      <button class="service-gallery-nav service-gallery-prev" type="button" aria-label="Photo précédente">‹</button>
+      <img id="service-gallery-image" src="" alt="">
+      <button class="service-gallery-nav service-gallery-next" type="button" aria-label="Photo suivante">›</button>
+    </div>
+    <p id="service-gallery-caption" class="service-gallery-caption"></p>
   </dialog>
 
   <footer class="site-footer">
