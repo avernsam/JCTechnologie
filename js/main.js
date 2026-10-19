@@ -54,21 +54,66 @@ document.addEventListener("pointerdown", (event) => {
 });
 
 const whatsappChooser = document.querySelector("#whatsapp-chooser");
-const whatsappOptions = whatsappChooser?.querySelectorAll("[data-whatsapp-option]");
 const whatsappClose = whatsappChooser?.querySelector(".whatsapp-chooser-close");
+const whatsappTargets = whatsappChooser?.querySelectorAll('input[name="whatsapp-target"]');
+const whatsappPrepareButton = document.querySelector("#whatsapp-prepare-button");
+const whatsappPrepareStatus = document.querySelector("#whatsapp-prepare-status");
+const whatsappPrepared = document.querySelector("#whatsapp-prepared");
+const whatsappPreparedLinks = document.querySelector("#whatsapp-prepared-links");
+let pendingWhatsAppMessage = "";
 
 function openWhatsAppChooser(message) {
-  if (!whatsappChooser || typeof whatsappChooser.showModal !== "function" || !whatsappOptions) {
+  if (!whatsappChooser || typeof whatsappChooser.showModal !== "function" || !whatsappTargets) {
     const whatsappWindow = window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
     return Boolean(whatsappWindow);
   }
 
-  whatsappOptions.forEach((option, index) => {
-    option.href = whatsappUrl(message, WHATSAPP_NUMBERS[index]);
+  pendingWhatsAppMessage = message;
+  whatsappTargets.forEach((target) => {
+    target.checked = false;
   });
+  whatsappPrepared.hidden = true;
+  whatsappPreparedLinks.replaceChildren();
+  whatsappPrepareStatus.textContent = "";
   whatsappChooser.showModal();
   return true;
 }
+
+whatsappTargets?.forEach((target) => {
+  target.addEventListener("change", () => {
+    whatsappPrepared.hidden = true;
+    whatsappPrepareStatus.textContent = "";
+  });
+});
+
+whatsappPrepareButton?.addEventListener("click", () => {
+  const selectedTargets = Array.from(whatsappTargets || []).filter((target) => target.checked);
+  if (!selectedTargets.length) {
+    whatsappPrepareStatus.textContent = "Sélectionnez au moins un numéro.";
+    return;
+  }
+
+  whatsappPreparedLinks.replaceChildren();
+  selectedTargets.forEach((target) => {
+    const number = WHATSAPP_NUMBERS[Number(target.value)];
+    const link = document.createElement("a");
+    link.className = "whatsapp-option";
+    link.dataset.whatsappOption = "";
+    link.href = whatsappUrl(pendingWhatsAppMessage, number);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.append("Ouvrir WhatsApp ");
+    const phone = document.createElement("strong");
+    phone.textContent = `+${number}`;
+    link.append(phone);
+    whatsappPreparedLinks.append(link);
+  });
+
+  whatsappPrepared.hidden = false;
+  whatsappPrepareStatus.textContent = selectedTargets.length === 2
+    ? "Les deux conversations sont prêtes. Ouvrez-les une par une."
+    : "La conversation sélectionnée est prête.";
+});
 
 document.addEventListener("click", (event) => {
   const link = event.target.closest('a[href*="wa.me/"]');
@@ -194,7 +239,7 @@ if (form) {
       formStatus.textContent = "WhatsApp n’a pas pu s’ouvrir. Vérifiez le blocage des fenêtres ou contactez-nous directement.";
       return;
     }
-    formStatus.textContent = "Choisissez le numéro WhatsApp auquel envoyer votre demande.";
+    formStatus.textContent = "Sélectionnez un ou deux numéros WhatsApp pour préparer votre demande.";
   });
 }
 

@@ -363,12 +363,19 @@
 
   <dialog class="whatsapp-chooser" id="whatsapp-chooser" aria-labelledby="whatsapp-chooser-title">
     <div class="whatsapp-chooser-header">
-      <div><h2 id="whatsapp-chooser-title">Choisissez un compte WhatsApp</h2><p>Votre message sera préparé dans la conversation choisie.</p></div>
+      <div><h2 id="whatsapp-chooser-title">Choisissez où envoyer</h2><p>Sélectionnez un numéro ou les deux. Vous devrez envoyer le message dans chaque conversation WhatsApp.</p></div>
       <button class="whatsapp-chooser-close" type="button" aria-label="Fermer">×</button>
     </div>
-    <div class="whatsapp-chooser-options">
-      <a class="whatsapp-option" data-whatsapp-option href="https://wa.me/243803548088" target="_blank" rel="noopener noreferrer">Numéro 1 <strong>+243 803 548 088</strong></a>
-      <a class="whatsapp-option" data-whatsapp-option href="https://wa.me/243991085865" target="_blank" rel="noopener noreferrer">Numéro 2 <strong>+243 991 085 865</strong></a>
+    <fieldset class="whatsapp-targets">
+      <legend>Numéro(s) destinataire(s)</legend>
+      <label class="whatsapp-target"><input type="checkbox" name="whatsapp-target" value="0"><span>Compte WhatsApp 1<strong>+243 803 548 088</strong></span></label>
+      <label class="whatsapp-target"><input type="checkbox" name="whatsapp-target" value="1"><span>Compte WhatsApp 2<strong>+243 991 085 865</strong></span></label>
+    </fieldset>
+    <button class="button button-green whatsapp-prepare-button" id="whatsapp-prepare-button" type="button">Préparer le message</button>
+    <p class="whatsapp-prepare-status" id="whatsapp-prepare-status" role="status" aria-live="polite"></p>
+    <div class="whatsapp-prepared" id="whatsapp-prepared" hidden>
+      <p>Ouvre chaque conversation ci-dessous, puis appuie sur <strong>Envoyer</strong> dans WhatsApp.</p>
+      <div class="whatsapp-prepared-links" id="whatsapp-prepared-links"></div>
     </div>
   </dialog>
 
