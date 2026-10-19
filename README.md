@@ -12,7 +12,7 @@ Site statique en français, réalisé en HTML, CSS et JavaScript natifs. Aucun f
 - **Textes :** modifiez les contenus directement dans `index.html`. Les libellés des services du formulaire doivent correspondre à ceux des liens de devis pour sélectionner automatiquement le service.
 - **Couleurs :** changez les variables de `:root` au début de `css/style.css`.
 - **Mode sombre :** utilisez le bouton soleil/lune dans l’en-tête. Le choix est mémorisé dans le navigateur ; adaptez les couleurs sombres dans le bloc `html[data-theme="dark"]` de `css/style.css`.
-- **Logo :** l’image officielle JCT et ses services, utilisée dans la section « À propos », est `assets/jct-brand-services.jpeg`. Pour remplacer l’icône temporaire du header et le favicon, actualisez les références à `assets/logo.svg` dans `index.html`. La photo de véhicule est dans `assets/jct-vehicle.jpe`. Les pictogrammes de services extraits de l’image JCT fournie sont dans `assets/service-*.jpg` ; cette image d’origine est conservée dans `assets/jct-brand-services.png`. Les illustrations originales de la section services sont les fichiers `assets/service-*-scene.svg` et `assets/service-air-conditioning.svg`.
+- **Logo :** le logo JCT officiel recadré pour l’en-tête, le favicon et l’aperçu de partage est `assets/logo.svg`. L’image complète présentant la marque et ses services dans la section « À propos » est `assets/jct-brand-services.jpeg`. La photo de véhicule est dans `assets/jct-vehicle.jpe`. Les pictogrammes de services extraits de l’image JCT fournie sont dans `assets/service-*.jpg` ; cette image d’origine est conservée dans `assets/jct-brand-services.png`. Les illustrations originales de la section services sont les fichiers `assets/service-*-scene.svg` et `assets/service-air-conditioning.svg`.
 
 ## Publication
 
@@ -22,7 +22,6 @@ Site statique en français, réalisé en HTML, CSS et JavaScript natifs. Aucun f
 
 ## À personnaliser avant publication
 
-- Remplacer le logo vectoriel de démonstration par le fichier officiel `logo.jpeg` ou un export optimisé.
 - Ajouter des photos réelles et optimisées des installations et de l’équipe, avec des textes alternatifs descriptifs.
 - La section « Clients satisfaits » présente un compteur animé de +100 clients, les quatre domaines d’expertise et les quatre villes desservies. Les compteurs s’animent à l’affichage et restent statiques si la réduction des animations est activée.
 - Vérifier les coordonnées, les zones desservies, les services proposés et les disponibilités d’intervention.
