@@ -83,7 +83,8 @@ img, svg { display: block; }
 
 .hero { position: relative; display: flex; min-height: 610px; overflow: hidden; align-items: center; color: #fff; background: linear-gradient(112deg, #082f70 0%, #0b3d91 49%, #0f8a67 100%); }
 .hero::before { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.18) .7px, transparent .7px); background-size: 28px 28px; opacity: .18; content: ""; }
-.hero-content { position: relative; z-index: 2; max-width: 1160px; padding-top: 74px; padding-right: clamp(500px, 54vw, 600px); padding-bottom: 72px; }
+.hero-content { position: relative; z-index: 2; max-width: 1160px; padding-top: 74px; padding-right: clamp(500px, 54vw, 600px); padding-bottom: 72px; pointer-events: none; }
+.hero-content > * { pointer-events: auto; }
 .hero-content > * { max-width: 660px; }
 .eyebrow { margin: 0 0 12px; color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .eyebrow-light { display: flex; align-items: center; gap: 9px; color: rgba(255,255,255,.82); letter-spacing: .12em; }
@@ -98,7 +99,8 @@ img, svg { display: block; }
 .hero-orb-one { width: 610px; height: 610px; top: -240px; right: -90px; }
 .hero-orb-two { width: 470px; height: 470px; top: -170px; right: -20px; }
 .hero-decoration { position: absolute; z-index: 1; right: max(calc((100vw - 1160px)/2), 4%); top: 50%; width: clamp(440px, 48vw, 560px); height: clamp(320px, 36vw, 410px); transform: translateY(-46%); }
-.hero-photo-frame { position: absolute; inset: 18px 12px 10px 18px; overflow: hidden; border: 1px solid rgba(255,255,255,.48); border-radius: 22px; background: #0a1c32; box-shadow: 0 28px 80px rgba(0,0,0,.3); transform: rotate(-3deg); }
+.hero-photo-frame { position: absolute; inset: 18px 12px 10px 18px; overflow: hidden; border: 1px solid rgba(255,255,255,.48); border-radius: 22px; background: #0a1c32; box-shadow: 0 28px 80px rgba(0,0,0,.3); transform: rotate(-3deg); cursor: pointer; }
+.hero-photo-frame:focus-visible { outline: 3px solid #89f2ad; outline-offset: 5px; }
 .hero-photo-frame::after { position: absolute; inset: 35% 0 0; background: linear-gradient(180deg, transparent, rgba(4,18,36,.78)); content: ""; pointer-events: none; }
 .hero-photo-gallery { position: absolute; inset: 12px; display: grid; grid-template-columns: 1.55fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 9px; }
 .hero-photo-frame .hero-photo-gallery img { position: static; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; object-position: center; transform: none; border-radius: 12px; }

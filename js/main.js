@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBERS = ["243803548088", "243991085865"];
+const WHATSAPP_NUMBERS = ["243972574839", "243803548088"];
 
 const menuToggle = document.querySelector(".menu-toggle");
 const mainNav = document.querySelector("#main-nav");
